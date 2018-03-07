@@ -40,32 +40,31 @@ import org.apache.spark.sql.functions._
 // COMMAND ----------
 
 // MAGIC %md
-// MAGIC # Setting Up Event Hubs connection
-// MAGIC Ok, we have our imports. How, let's set up the Event Hub connection. You'll need all of your Event Hub (or IoT Hub) settings for this, from the Azure portal.
+// MAGIC # Setting Up Event Hubs / IoT Hub connection
+// MAGIC Ok, we have our imports. How, let's set up the Event Hubs or IoT Hub connection. You'll need all of your Event Hub (or IoT Hub) settings for this, from the Azure portal.
 // MAGIC 
-// MAGIC One setting you might not have configured is the `consumerGroup`. Each Event Hubs endpoint may have multiple consumer groups, with a default consumer group defined when the endpoint is created. You'll want to create your own consumer group, as this gives you your own independent view into the incoming data stream, which does not conflict with others who might also be reading from the same stream. If you haven't done so, please create a new consumer group for yourself, and specify it, along with the other Event Hubs parameters, below, replacing the `<foo>` placeholders with your real setting name (without the `<>` brackets, of course). Leave the `progressDir setting as is. `progressDir` is a temporary directory on the local file system.
+// MAGIC One setting you might not have configured is the `consumerGroup`. Each Event Hubs endpoint may have multiple consumer groups, with a default consumer group defined when the endpoint is created. You'll want to create your own consumer group, as this gives you your own independent view into the incoming data stream, which does not conflict with others who might also be reading from the same stream. If you haven't done so, please create a new consumer group for yourself.
+// MAGIC 
+// MAGIC Here is an example of where you'd find the Event Hubs compatible connection string for an IoT Hub, along with Event Hubs name and Consumer Group:
+// MAGIC 
+// MAGIC ![example of event hubs connection string details](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/event-hubs-settings.png?raw=true)
+// MAGIC 
+// MAGIC Now, using these properties, set up your connection below, replacing `<foo>` placeholders with your real setting name (without the `<>` brackets, of course).
 
 // COMMAND ----------
 
 // Modify to include your event hubs parameters here
-val eventHubNamespace = "<EHNamespace>"
-val progressDir = "/newprogress/"
-val policyName = "<policy name>"
-val policyKey = "<policy key>"
-val eventHubName = "<name>"
-val consumerGroup = "<consumer group name>"
-val partitionCount = "<partition count>"
 
-// this defines a convenient map (like a c# dictionary) containing all of your settings you just specified above. Don't change this variable
-val eventhubParameters = Map[String, String](
-  "eventhubs.policyname" -> policyName,
-  "eventhubs.policykey" -> policyKey,
-  "eventhubs.namespace" -> eventHubNamespace,
-  "eventhubs.name" -> eventHubName,
-  "eventhubs.partition.count" -> partitionCount,
-  "eventhubs.consumergroup" -> consumerGroup,
-  "eventhubs.progressTrackingDir" -> progressDir
-)
+import org.apache.spark.eventhubs.ConnectionStringBuilder
+
+// Build connection string with the above information 
+val connectionString = ConnectionStringBuilder("<YOUR.EVENTHUB.COMPATIBLE.ENDPOINT>")
+  .setEventHubName("<YOUR.EVENTHUB.COMPATIBLE.NAME>")
+  .build
+
+// this sets up our event hubs configuration, including consumer group
+val ehConf = EventHubsConf(connectionString)
+  .setConsumerGroup("<YOUR.CONSUMER.GROUP>")
 
 // COMMAND ----------
 
@@ -78,10 +77,11 @@ val eventhubParameters = Map[String, String](
 // COMMAND ----------
 
 // First, create the data frame
-val df = spark.readStream
- .format("eventhubs")
- .options(eventhubParameters)
- .load()
+val df = spark
+  .readStream
+  .format("eventhubs")
+  .options(ehConf.toMap)
+  .load()
 
 
 // COMMAND ----------
