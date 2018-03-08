@@ -47,7 +47,7 @@ import org.apache.spark.sql.functions._
 // MAGIC 
 // MAGIC Here is an example of where you'd find the Event Hubs compatible connection string for an IoT Hub, along with Event Hubs name and Consumer Group:
 // MAGIC 
-// MAGIC ![example of event hubs connection string details](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/event-hubs-settings.png?raw=true)
+// MAGIC ![example of event hubs connection string details](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/event-hubs-settings.png?raw=true =300x)
 // MAGIC 
 // MAGIC Now, using these properties, set up your connection below, replacing `<foo>` placeholders with your real setting name (without the `<>` brackets, of course).
 
