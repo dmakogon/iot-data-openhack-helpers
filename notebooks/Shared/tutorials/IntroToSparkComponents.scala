@@ -30,4 +30,25 @@
 // MAGIC 
 // MAGIC As it turns out, the Structured Query Language (SQL) has become commonplace. And, to make sure Spark is as capable as the tools that preceded it (such as Hive), Spark now has a very powerful SQL query engine built-in, available for you when performing queries.
 // MAGIC 
-// MAGIC As `spark` is your entry point into the driver, `spark.sql()` is your way to execute a SQL query. As an example: Imagine a `People`file. <tbd>
+// MAGIC As `spark` is your entry point into the driver, `spark.sql()` is your way to execute a SQL query. As an example: Imagine a `People`file, read into a data frame. Once this is done, you can create an in-memory table to query, and execute SQL against it:
+// MAGIC 
+// MAGIC ```
+// MAGIC peopleDF.createOrReplaceTempView("people") // this will overwrite an existing table named 'people'
+// MAGIC spark.sql("SELECT name, age FROM people WHERE age >= 18")
+// MAGIC ```
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC ## Learning more
+// MAGIC 
+// MAGIC  - Spark's introductory programming guide is [here](https://spark.apache.org/docs/latest/sql-programming-guide.html#loading-data-programmatically), giving a great overview of working with RDDs, Datasets, and SQL.
+// MAGIC  - Download the free eBook from Databricks, "A Gentle Introduction to Apache Spark", [here](https://pages.databricks.com/gentle-intro-spark.html)
+// MAGIC  - Spark has an entire set of programming guides at [spark.apache.org](https://spark.apache.org). A few specific pages that are very helpful:
+// MAGIC    - [Quick start](https://spark.apache.org/docs/latest/quick-start.html)
+// MAGIC    - [SQL, Datasets, and DataFrames](https://spark.apache.org/docs/latest/sql-programming-guide.html)
+// MAGIC    - [Scala programming guide](https://spark.apache.org/docs/latest/api/scala/index.html#org.apache.spark.package)
+// MAGIC    - [SQL programming guide](https://spark.apache.org/docs/latest/api/sql/index.html)
+// MAGIC                                                                                             
+// MAGIC                                                  
+// MAGIC                                                
