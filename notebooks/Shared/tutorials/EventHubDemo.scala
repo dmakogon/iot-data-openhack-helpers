@@ -3,7 +3,7 @@
 // MAGIC 
 // MAGIC This notebook helps get you set up with various "plumbing" for Event Hubs, blob storage, and dataframes. And then you'll be able to create your own queries against data streaming through the Event Hubs endpoint.
 // MAGIC 
-// MAGIC Note: This notebook is written in Scala, but you can also use Python or Java for your own projects.
+// MAGIC Note: This notebook is written in Scala, but you can also use Python or R for your own projects.
 
 // COMMAND ----------
 
@@ -33,7 +33,7 @@
 // MAGIC 
 // MAGIC Bonus: Once you run a cell defining your imports, you don't have to run that cell again, until your cluster is restarted.
 // MAGIC 
-// MAGIC For a bit more info on cells, take a look at <a href="$./IntroToCells">this notebook</a>.
+// MAGIC For a bit more info on cells, take a look at <a href="$./IntroToNotebooks">this notebook</a>.
 
 // COMMAND ----------
 
@@ -78,6 +78,10 @@ val ehConf = EventHubsConf(connectionString)
 // MAGIC 
 // MAGIC For this simple example, we are using Event Hubs as the streaming source of our Dataframe, and taking advantage of the `readStream` function to read directly from Event Hubs. `readStream` is similar to a file object's `read` method that you might have seen in other languages.
 // MAGIC 
+// MAGIC It is important to understand the difference between `read` function and `readStream`. Simply stated, it is as follows: <br>
+// MAGIC `read` => For reading static data or data in batches.<br>
+// MAGIC `readStream` => For reading streaming data.
+// MAGIC 
 // MAGIC **See also:** [reading data from event hubs](https://github.com/Azure/azure-event-hubs-spark/blob/master/docs/structured-streaming-eventhubs-integration.md#reading-data-from-event-hubs)
 
 // COMMAND ----------
@@ -106,7 +110,7 @@ val df = spark
 // MAGIC | publisher | string |
 // MAGIC | partitionKey | string |
 // MAGIC 
-// MAGIC For our purposes, we only need `body`. The issue is, `body` is transmitted as binary data. So we will do a simple cast to convert this data to a string.
+// MAGIC For our purposes, we only need `body`. The issue is, `body` is transmitted as binary data by Event Hubs by default. The reason being, to save on costs  So, we will do a simple cast to convert this data to a string.
 
 // COMMAND ----------
 
@@ -150,3 +154,11 @@ spark.sql("SELECT * from sampledata")
 // COMMAND ----------
 
 memoryQuery.stop()
+
+// COMMAND ----------
+
+val df = spark.read.csv("/databricks-datasets/data.gov/irs_zip_code_data/data-001/2013_soi_zipcode_agi.csv")
+df.select("_c0","_c1").groupBy("_c0").
+
+// COMMAND ----------
+
