@@ -53,7 +53,29 @@ greeting
 // MAGIC 
 // MAGIC Instead of just hitting the "Play" button, you may also choose other options, by using the dropdown next to the "Play" button:
 // MAGIC 
-// MAGIC ![dropdown for Play options](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/play_options.png?raw=true =100x)
+// MAGIC ![dropdown for Play options](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/play-options.png?raw=true)
+// MAGIC 
+// MAGIC From a given cell, you can run everything above or below a cell, instead of running just the current cell.
+// MAGIC 
+// MAGIC Additionally, you might want to run the entire Notebook, in order. Or maybe clear out all variables that have been set. Or... do both: clear out everything, then run everything. You'll see all of these options at the top of the notebook:
+// MAGIC 
+// MAGIC ![dropdown for clear and run options](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/run-all.png?raw=true)
 
 // COMMAND ----------
 
+// MAGIC %md
+// MAGIC ## Keyboard Shortcuts
+// MAGIC 
+// MAGIC You don't have to use dropdowns to execute code, or work with Notebooks in general. There is an entire set of keyboard shortcuts (like `<shift>-<enter>` that you already used) at your disposal. Click the keyboard icon, in the top-right of the notebook, to view all shortcuts. Here's a snippet of what you'll see when clicking the keyboard icon:
+// MAGIC 
+// MAGIC ![keyboard shortcuts](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/keyboard-shortcuts.png?raw=true)
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC ## Notebooks and Collaboration
+// MAGIC If you're working alone, it's fine to store your Notebooks within your user-specific folder in the `Workspace` area of Databricks. However, if you're collaborating with teammates, it might be better to place this notebook in the `Shared` folder, so that every user has access.
+// MAGIC 
+// MAGIC Further: Databricks Notebooks are linkable to version control systems such as github, which helps considerably when trying to track changes. In general, this lets you treat Notebooks the same way you'd treat any other source file.
+// MAGIC 
+// MAGIC For more details on Databricks Github integration, take a look at [this article](https://docs.databricks.com/user-guide/notebooks/github-version-control.html).
