@@ -9,19 +9,19 @@
 // MAGIC 
 // MAGIC ## Step 0: the Driver
 // MAGIC 
-// MAGIC Spark is a distributed data processing environment. And if you imagine a cluster with several nodes, all available to help process a block or stream of data, the workload tends to get distributed across those nodes. The distribution, and general job management interface that you'll work with, is the **Driver**. And when you execute specific actions (or submit jobs to the cluster), it's the Driver's responsibility to distribute the activity or job across the clusters.
+// MAGIC Spark is a distributed data processing environment. And if you imagine a cluster with a master node and several worker nodes, all available to help process a block or stream of data, the workload tends to get distributed across those nodes. The distribution, and general job management interface that you'll work with, is the **Driver** (master node). And when you execute specific actions (or submit jobs to the cluster), it's the Driver's responsibility to distribute the activity or job across the clusters.
 // MAGIC 
-// MAGIC Within the Spark environment, you'll have pre-defined variables. One such variable is `spark`, which is essentially your driver.
+// MAGIC Within the Spark environment, you'll have pre-defined variables. One such variable is `spark`, which is essentially your spark session (running on the driver).
 // MAGIC 
 // MAGIC ## RDD's
 // MAGIC 
-// MAGIC Spark uses *Resilient Distributed Datasets* (RDDs) to partition data across nodes in a cluster. These are designed so that they can perform actions in parallel. Further, they are designed with resiliency in mind: as they progress through their data processing tasks, they are able to store intermediate results and counters, to persistent storage. This way, in case of a disruption (such as a node rebooting), the cluster can recover from a saved checkpoint and continue, without having to restart the entire operation.
+// MAGIC Spark uses *Resilient Distributed Datasets* (RDDs) to partition data across nodes in a cluster. <b>Simply, these are "datasets" that are fault tolerant.</b> These are designed so that they can perform actions in parallel. Further, they are designed with resiliency in mind: as they progress through their data processing tasks, they are able to store intermediate results and counters, to persistent storage. This way, in case of a disruption (such as a node rebooting), the cluster can recover from a saved checkpoint and continue, without having to restart the entire operation.
 // MAGIC 
 // MAGIC While there are many operations and transforms you can perform on an RDD, there isn't much structure to the data. And that is where DataFrames come into play.
 // MAGIC 
 // MAGIC ## DataFrames
 // MAGIC 
-// MAGIC A Spark dataframe can be thought of as a table. Similar to a relational data table, with columns and rows. In reality, there aren't exactly *rows*. More like chunks of data (static or streaming), organized into the dataframe in a similar way to how you'd organize data in a database table.
+// MAGIC These are the new way of data processing in Spark. A Spark dataframe can be thought of as a table. Similar to a relational data table, with columns and rows. In reality, there aren't exactly *rows*. More like chunks of data (static or streaming), organized into the dataframe in a similar way to how you'd organize data in a database table.
 // MAGIC 
 // MAGIC Where DataFrames shine is with their ability to let you partition, query, group, order, and aggregate content. There are many additional operations available as well: flattening arrays, substituting default values for missing data, eliminating rows with null values, replacing values within an existing column, on and on.
 // MAGIC 
