@@ -1,6 +1,6 @@
 // Databricks notebook source
 // MAGIC %md
-// MAGIC # Intro to cells
+// MAGIC # Intro to Notebooks
 // MAGIC 
 // MAGIC A notebook is comprised of *cells.* Each individual cell is run in its entirety, and has its own output. You can think of a cell as a function or method in common programming languages, in that all of the code within the cell are run as an atomic unit.
 // MAGIC 
@@ -16,7 +16,7 @@ val greeting = "Hello world!"
 // COMMAND ----------
 
 // MAGIC %md
-// MAGIC In the cell above, a string, called `greeting`, is defined. To run this cell, either choose "Play" arrow button in the top-right of the cell, or use the `<shift>-<enter>` shortcut while your cursor is anywhere within the cell. You should then see something similar to:
+// MAGIC In the cell above, a string, called `greeting`, is defined. To run this cell, either choose <b>"Play"</b> arrow button in the top-right of the cell, or use the `<shift>-<enter>` shortcut while your cursor is anywhere within the cell. You should then see something similar to:
 // MAGIC 
 // MAGIC `greeting: Strting = Hello world!
 // MAGIC 
@@ -24,13 +24,13 @@ val greeting = "Hello world!"
 
 // COMMAND ----------
 
-greeting
+print(greeting)
 
 // COMMAND ----------
 
 // MAGIC %md
 // MAGIC ## Default programming language
-// MAGIC Now: when you first created your notebook, you were required to choose a *language* for the notebook: Python, Java, Scala, or R. This cannot be changed, once the notebook is created. However, for any given cell, you may override the language used within that cell.
+// MAGIC Now: when you first created your notebook, you were required to choose a *language* for the notebook: Python, Scala, SQL or R. This cannot be changed, once the notebook is created. However, for any given cell, you may override the language used within that cell.
 // MAGIC 
 // MAGIC For example: This Notebook's default language is Scala. Let's say you wanted to re-create the demo above with the `greeting` string, but with Python. You can do this, by specifying the desired language at the top of the cell, with a special `%` directive, such as `%python`. The next cell demonstrates this (feel free to run it)
 
@@ -38,12 +38,12 @@ greeting
 
 // MAGIC %python
 // MAGIC python_greeting = 'Hello world!'
-// MAGIC python_greeting
+// MAGIC print(python_greeting)
 
 // COMMAND ----------
 
 // MAGIC %md
-// MAGIC ## Using Markdown to provide formatted text
+// MAGIC ## Using Markdown to provide formatted text like this
 // MAGIC If you're creating your own Notebook, and you want to provide formatted text to help document it, you may use the `%md` directive, to specify that a cell contains Markdown. This Notebook makes use of Markdown (including this cell.)
 
 // COMMAND ----------
@@ -55,11 +55,22 @@ greeting
 // MAGIC 
 // MAGIC ![dropdown for Play options](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/play-options.png?raw=true)
 // MAGIC 
-// MAGIC From a given cell, you can run everything above or below a cell, instead of running just the current cell.
+// MAGIC From a given cell, you can run everything above or below a cell, instead of running just the current cell. Additionally, you might want to run the entire Notebook, in order. 
 // MAGIC 
-// MAGIC Additionally, you might want to run the entire Notebook, in order. Or maybe clear out all variables that have been set. Or... do both: clear out everything, then run everything. You'll see all of these options at the top of the notebook:
+// MAGIC Sometimes, you may want to get into a "clean state", sort of like clearing your cache (this is recommended for when you restart your cluster). You can also clear out all the variables and, then run everything. You'll see all of these options at the top of the notebook:
 // MAGIC 
 // MAGIC ![dropdown for clear and run options](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/run-all.png?raw=true)
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC ## Autocomplete & IntelliSense
+// MAGIC 
+// MAGIC While true intelliSense doesn't exist in a notebook environment, there is autocomplete. To use autocomplete, simply press `<tab>` and it will give you all the options to apply to an object.
+// MAGIC 
+// MAGIC For instance, if you press `<tab>` after the period `.`, you will get a list of all the functions that can be applied on the val/var.
+// MAGIC 
+// MAGIC ![Autocomplete In Notebooks](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/autocomplete.png?raw=true)
 
 // COMMAND ----------
 
@@ -79,3 +90,6 @@ greeting
 // MAGIC Further: Databricks Notebooks are linkable to version control systems such as github, which helps considerably when trying to track changes. In general, this lets you treat Notebooks the same way you'd treat any other source file.
 // MAGIC 
 // MAGIC For more details on Databricks Github integration, take a look at [this article](https://docs.databricks.com/user-guide/notebooks/github-version-control.html).
+
+// COMMAND ----------
+
