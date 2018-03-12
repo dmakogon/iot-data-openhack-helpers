@@ -17,6 +17,8 @@
 // MAGIC ## Spark Connector SDK
 // MAGIC The Spark Connector SDK may be found [here](https://github.com/Azure/azure-event-hubs-spark).
 // MAGIC 
+// MAGIC If you're searching via Maven, the latest driver is named `"azure-eventhubs-spark_2.11"`
+// MAGIC 
 // MAGIC Once installed, please be sure to click the checkbox for the cluster you want to attach this library to.
 // MAGIC 
 // MAGIC ## Imports
@@ -30,6 +32,8 @@
 // MAGIC Likewise, once you define imports and run the cell with the definition of those imports, you may now run code in any cell that has a dependency on those imports.
 // MAGIC 
 // MAGIC Bonus: Once you run a cell defining your imports, you don't have to run that cell again, until your cluster is restarted.
+// MAGIC 
+// MAGIC For a bit more info on cells, take a look at <a href="$./IntroToCells">this notebook</a>.
 
 // COMMAND ----------
 
