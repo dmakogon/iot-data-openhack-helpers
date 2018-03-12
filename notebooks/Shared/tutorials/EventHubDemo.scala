@@ -3,7 +3,7 @@
 // MAGIC 
 // MAGIC This notebook helps get you set up with various "plumbing" for Event Hubs, blob storage, and dataframes. And then you'll be able to create your own queries against data streaming through the Event Hubs endpoint.
 // MAGIC 
-// MAGIC Note: This notebook is written in Scala.
+// MAGIC Note: This notebook is written in Scala, but you can also use Python or Java for your own projects.
 
 // COMMAND ----------
 
@@ -74,7 +74,9 @@ val ehConf = EventHubsConf(connectionString)
 
 // MAGIC %md
 // MAGIC # Connecting to Event Hub
-// MAGIC Ok, now we need to wrie up a data frame to Event Hubs.
+// MAGIC Ok, now we need to wire up a dataframe to Event Hubs. If you haven't worked with Dataframes before: for the purposes of this exercise, just imagine a very large database table, that allows for operations to be partitioned and performed in parallel, with data that could either be static or streaming in from a live source.
+// MAGIC 
+// MAGIC For this simple example, we are using Event Hubs as the streaming source of our Dataframe, and taking advantage of the `readStream` function to read directly from Event Hubs. `readStream` is similar to a file object's `read` method that you might have seen in other languages.
 // MAGIC 
 // MAGIC **See also:** [reading data from event hubs](https://github.com/Azure/azure-event-hubs-spark/blob/master/docs/structured-streaming-eventhubs-integration.md#reading-data-from-event-hubs)
 
@@ -110,8 +112,7 @@ val df = spark
 
 // create a new dataframe with decoded body
 val eventhubsDF = df
-  .select("body")
-  .as[String]
+  .selectExpr("CAST(body as STRING)")
 
 // COMMAND ----------
 
