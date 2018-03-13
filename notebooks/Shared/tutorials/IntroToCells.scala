@@ -18,7 +18,7 @@ val greeting = "Hello world!"
 // MAGIC %md
 // MAGIC In the cell above, a string, called `greeting`, is defined. To run this cell, either choose <b>"Play"</b> arrow button in the top-right of the cell, or use the `<shift>-<enter>` shortcut while your cursor is anywhere within the cell. You should then see something similar to:
 // MAGIC 
-// MAGIC `greeting: Strting = Hello world!
+// MAGIC `greeting: Strting = Hello world!`
 // MAGIC 
 // MAGIC Now, in the next cell, we simply print out the greeting. Because all cells share a session, the `greeting` variable should already be defined. Go ahead and run the next cell.
 
