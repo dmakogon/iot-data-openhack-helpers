@@ -19,7 +19,9 @@
 // MAGIC 
 // MAGIC If you're searching via Maven, the latest driver is named `"azure-eventhubs-spark_2.11"`
 // MAGIC 
-// MAGIC Once installed, please be sure to click the checkbox for the cluster you want to attach this library to.
+// MAGIC Once installed, please be sure to click the checkbox for the cluster you want to attach this library to. You will see this option as soon as you create the library. Alternatively, you can select the library from your Workspace later, if you didn't attach it when you first created the library. Note: You can choose a specific cluster to attach a library to, or you may simply choose to attach to all clusters:
+// MAGIC 
+// MAGIC ![attaching library to cluster](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/attach-driver-to-cluster.png?raw=true)
 // MAGIC 
 // MAGIC ## Imports
 // MAGIC Next, we'll define some important import statements, required for the Spark Connector. 
