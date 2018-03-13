@@ -110,7 +110,7 @@ val df = spark
 // MAGIC | publisher | string |
 // MAGIC | partitionKey | string |
 // MAGIC 
-// MAGIC For our purposes, we only need `body`. The issue is, `body` is transmitted as binary data by Event Hubs by default. The reason being, to save on costs  So, we will do a simple cast to convert this data to a string.
+// MAGIC For our purposes, we only need `body`. The issue is, `body` is transmitted as binary data by Event Hubs by default.  So, we will do a simple cast to convert this data to a string.
 
 // COMMAND ----------
 
