@@ -86,6 +86,15 @@ irisDF.createOrReplaceTempView("iris")
 
 // COMMAND ----------
 
+// MAGIC %md
+// MAGIC Note that you can also run your SQL command through `spark`, as the next example shows.
+
+// COMMAND ----------
+
+spark.sql("select * from iris limit 10").show(truncate=false)
+
+// COMMAND ----------
+
 val jdbcHostname = "openhacksqlsrv.database.windows.net"
 val jdbcPort = 1433
 val jdbcDatabase ="openhacksqldb"
