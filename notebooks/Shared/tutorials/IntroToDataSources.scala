@@ -41,3 +41,89 @@
 // MAGIC ## Additional resources
 // MAGIC 
 // MAGIC  - [Spark data sources](https://docs.databricks.com/spark/latest/data-sources/index.html)
+
+// COMMAND ----------
+
+spark.conf.set("fs.azure.account.key.openhackspark.blob.core.windows.net",  "xlkvzaPoN5MQvYgT/Yg70s6sEw2KBkrLpiqhbrR9IhHC8gbvP41MeMGjuljPpsAjvCzUn3MIjSaQ/w8oXDoroQ==")
+
+// COMMAND ----------
+
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
+
+// COMMAND ----------
+
+val DecimalType = DataTypes.createDecimalType(15, 10)
+
+val schema = StructType(
+  StructField("SepalLenght", DecimalType, nullable = false) ::
+  StructField("SepalWidth", DecimalType, nullable = false) ::
+  StructField("PetalLenght", DecimalType, nullable = false) ::
+  StructField("PetalWidth", DecimalType, nullable = false) ::
+  StructField("Class", StringType, nullable = false) ::
+  Nil
+)
+
+// COMMAND ----------
+
+// file originally from 
+// https://archive.ics.uci.edu/ml/datasets/iris
+val irisDF = sqlContext.read.schema(schema).format("csv").load("wasb://sample-data@openhackspark.blob.core.windows.net/iris.data")
+
+// COMMAND ----------
+
+// Make sure we actualy read something
+irisDF.take(10)
+
+// COMMAND ----------
+
+irisDF.createOrReplaceTempView("iris")
+
+// COMMAND ----------
+
+// MAGIC %sql
+// MAGIC SELECT * FROM iris LIMIT 10
+
+// COMMAND ----------
+
+val jdbcHostname = "openhacksqlsrv.database.windows.net"
+val jdbcPort = 1433
+val jdbcDatabase ="openhacksqldb"
+
+// Create the JDBC URL without passing in the user and password parameters.
+val jdbcUrl = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcDatabase}"
+
+// Create a Properties() object to hold the parameters.
+import java.util.Properties
+val connectionProperties = new java.util.Properties()
+val jdbcUsername = "openhack"
+val jdbcPassword = "0penH4ck!"
+connectionProperties.put("user", s"${jdbcUsername}")
+connectionProperties.put("password", s"${jdbcPassword}")
+
+// Set JDBC Driver
+val driverClass = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+connectionProperties.setProperty("Driver", driverClass)
+
+// COMMAND ----------
+
+// Let's check if connection with Azure SQL is up and running
+// (https://docs.azuredatabricks.net/spark/latest/data-sources/sql-databases.html#push-down-a-query-to-the-database-engine)
+val serverName = spark.read.jdbc(jdbcUrl, "(select @@servername as ServerName) t", connectionProperties)
+
+// COMMAND ----------
+
+display(serverName)
+
+// COMMAND ----------
+
+import org.apache.spark.sql.SaveMode
+
+// By default create and load the table
+// https://docs.azuredatabricks.net/spark/latest/data-sources/sql-databases.html#write-data-to-jdbc
+spark.sql("select * from iris")
+     .write 
+     .jdbc(jdbcUrl, "iris", connectionProperties)
+
+// COMMAND ----------
+
