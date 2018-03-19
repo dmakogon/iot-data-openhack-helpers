@@ -39,6 +39,7 @@ print(greeting)
 // MAGIC %python
 // MAGIC python_greeting = 'Hello world!'
 // MAGIC print(python_greeting)
+// MAGIC print(greeting) # this should fail - variable is defined in scala, not python
 
 // COMMAND ----------
 
