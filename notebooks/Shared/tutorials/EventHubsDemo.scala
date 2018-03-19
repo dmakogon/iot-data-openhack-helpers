@@ -105,7 +105,7 @@ val ehConf = EventHubsConf(connectionString)
 // COMMAND ----------
 
 // MAGIC %md
-// MAGIC # Connecting to Event Hub
+// MAGIC # Connecting to Event Hubs
 // MAGIC Ok, now we need to wire up a dataframe to Event Hubs. If you haven't worked with Dataframes before: for the purposes of this exercise, just imagine a very large database table, that allows for operations to be partitioned and performed in parallel, with data that could either be static or streaming in from a live source.
 // MAGIC 
 // MAGIC For this simple example, we are using Event Hubs as the streaming source of our Dataframe, and taking advantage of the `readStream` function to read directly from Event Hubs. `readStream` is similar to a file object's `read` method that you might have seen in other languages.
