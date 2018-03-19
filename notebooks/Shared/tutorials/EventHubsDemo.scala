@@ -86,7 +86,7 @@ import org.apache.spark.sql.eventhubs._
 
 // Modify to include your event hubs parameters here
 // Note: This code works only with the latest Event Hubs driver,
-// which is supported by both Databricks v4.0 and HDInsight v3.5
+// which is supported by both Databricks v3.5 & v4.0 and HDInsight v3.5
 
 import org.apache.spark.eventhubs.ConnectionStringBuilder
 import org.apache.spark.eventhubs.EventHubsConf
