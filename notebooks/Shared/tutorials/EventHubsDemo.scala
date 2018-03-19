@@ -197,3 +197,11 @@ df.select("_c0","_c1").groupBy("_c0").
 
 // COMMAND ----------
 
+// MAGIC %md
+// MAGIC #Data Sources
+// MAGIC 
+// MAGIC With Spark, you have many options for working with data sources. See <a href="$./IntroToDataSources">this Notebook</a> for more information about data sources.
+
+// COMMAND ----------
+
+#
