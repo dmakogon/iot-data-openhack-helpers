@@ -2,6 +2,12 @@
 // MAGIC %md
 // MAGIC # Intro to Notebooks
 // MAGIC 
+// MAGIC This is a simple walkthrough of the basics of Databricks Notebooks. For more details, please see the official Databricks documentation, [here](https://docs.databricks.com/user-guide/notebooks/index.html).
+// MAGIC 
+// MAGIC ## What is a Notebook?
+// MAGIC 
+// MAGIC Notebooks are a simple way to interact with Databricks. They are designed to help you write and run code against your cluster.
+// MAGIC 
 // MAGIC A notebook is comprised of *cells.* Each individual cell is run in its entirety, and has its own output. You can think of a cell as a function or method in common programming languages, in that all of the code within the cell are run as an atomic unit.
 // MAGIC 
 // MAGIC A key thing to note: All cells of a notebook share a common memory space. That is, if you defined a variable in one cell, then it's available in other cells.
