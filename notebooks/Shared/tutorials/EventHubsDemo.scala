@@ -25,7 +25,7 @@
 // MAGIC 
 // MAGIC For Databricks, these are the Maven coordinates for the Event Hubs SDK for Databricks:
 // MAGIC 
-// MAGIC  - Cluster v4.5, with Spark v2.1: `com.microsoft.azure:azure-eventhubs-databricks_2.11:3.4.0`
+// MAGIC  - Cluster v3.5, with Spark v2.1: `com.microsoft.azure:azure-eventhubs-databricks_2.11:3.4.0`
 // MAGIC  - Cluster v4.0, with Spark v2.3: `com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.0`
 // MAGIC  
 // MAGIC  To install the SDK in Databricks, traverse to the `Shared` folder (or your own personal folder) and select `Create Library`:
