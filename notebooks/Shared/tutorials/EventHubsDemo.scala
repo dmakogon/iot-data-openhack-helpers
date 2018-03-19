@@ -1,9 +1,12 @@
 // Databricks notebook source
-// MAGIC %md # Getting started with Event Hub + Spark
+// MAGIC %md # Getting started with Event Hubs + Spark
 // MAGIC 
-// MAGIC This notebook helps get you set up with various "plumbing" for Event Hubs, blob storage, and dataframes. And then you'll be able to create your own queries against data streaming through the Event Hubs endpoint.
+// MAGIC This notebook helps get you set up with various "plumbing" for Event Hubs, Blob storage, and 
+// MAGIC Dataframes. And then you'll be able to create your own queries against data streaming through the Event Hubs endpoint.
 // MAGIC 
 // MAGIC Note: This notebook is written in Scala, but you can also use Python or R for your own projects.
+// MAGIC 
+// MAGIC Also note: The basics of Spark are all documented online, [here](https://spark.apache.org/docs/latest/), and includes full programming guides and API docs.
 
 // COMMAND ----------
 
