@@ -56,9 +56,9 @@ import org.apache.spark.sql.types._
 val DecimalType = DataTypes.createDecimalType(15, 10)
 
 val schema = StructType(
-  StructField("SepalLenght", DecimalType, nullable = false) ::
+  StructField("SepalLength", DecimalType, nullable = false) ::
   StructField("SepalWidth", DecimalType, nullable = false) ::
-  StructField("PetalLenght", DecimalType, nullable = false) ::
+  StructField("PetalLength", DecimalType, nullable = false) ::
   StructField("PetalWidth", DecimalType, nullable = false) ::
   StructField("Class", StringType, nullable = false) ::
   Nil
