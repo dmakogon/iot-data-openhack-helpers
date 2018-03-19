@@ -15,13 +15,34 @@
 // MAGIC  - add required import statements (which are equivalent to c#'s "using" statement)
 // MAGIC  
 // MAGIC ## Spark Connector SDK
-// MAGIC The Spark Connector SDK may be found [here](https://github.com/Azure/azure-event-hubs-spark).
+// MAGIC The Spark Connector SDK may be found [here](https://github.com/Azure/azure-event-hubs-spark). But there's a much easier way to install the correct driver, if you know its Maven coordinates. 
+// MAGIC Note: Maven is a dependency/build manager tool for Java. Similar to Nuget for .net and npm for Node.js. Here are the instructions for installing the correct SDK, based on the Maven coordinates.
 // MAGIC 
-// MAGIC If you're searching via Maven, the latest driver is named `"azure-eventhubs-spark_2.11"`
 // MAGIC 
-// MAGIC Once installed, please be sure to click the checkbox for the cluster you want to attach this library to. You will see this option as soon as you create the library. Alternatively, you can select the library from your Workspace later, if you didn't attach it when you first created the library. Note: You can choose a specific cluster to attach a library to, or you may simply choose to attach to all clusters:
+// MAGIC ### Selecting and initializing the correct driver
 // MAGIC 
-// MAGIC ![attaching library to cluster](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/attach-driver-to-cluster.png?raw=true)
+// MAGIC It's important to choose the correct Event Hubs SDK, depending on which version of Spark you're working with.
+// MAGIC 
+// MAGIC For Databricks, these are the Maven coordinates for the Event Hubs SDK for Databricks:
+// MAGIC 
+// MAGIC  - Cluster v4.5, with Spark v2.1: `com.microsoft.azure:azure-eventhubs-databricks_2.11:3.4.0`
+// MAGIC  - Cluster v4.0, with Spark v2.3: `com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.0`
+// MAGIC  
+// MAGIC  To install the SDK in Databricks, traverse to the `Shared` folder (or your own personal folder) and select `Create Library`:
+// MAGIC  
+// MAGIC ![menu for creating library](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/create-library-menu.png?raw=true)
+// MAGIC 
+// MAGIC 
+// MAGIC Then, choose to enter Maven coordinates, enter the correct SDK's coordinates, and choose to Create the library:
+// MAGIC 
+// MAGIC ![select Maven option](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/source-maven.png?raw=true)
+// MAGIC 
+// MAGIC 
+// MAGIC ![menu for creating library](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/maven-create.png?raw=true)
+// MAGIC 
+// MAGIC At this point, you must attach the SDK to a cluster. You will be shown a list of your clusters. Choose which ever cluster(s) you are using, and select the checkbox.
+// MAGIC 
+// MAGIC ![menu for creating library](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/attach-driver-to-cluster.png?raw=true =300x)
 // MAGIC 
 // MAGIC ## Imports
 // MAGIC Next, we'll define some important import statements, required for the Spark Connector. 
@@ -42,6 +63,7 @@
 import org.apache.spark.sql._
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.eventhubs._
 
 // COMMAND ----------
 
@@ -62,15 +84,23 @@ import org.apache.spark.sql.functions._
 // Modify to include your event hubs parameters here
 
 import org.apache.spark.eventhubs.ConnectionStringBuilder
+import org.apache.spark.eventhubs.EventHubsConf
+
+//<YOUR.EVENTHUB.COMPATIBLE.ENDPOINT>"
+val iotConnString = "Endpoint=sb://iothub-ns-openhack-m-376822-140f1bd390.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=POzssj3SYghfRzNW14mgIVEWB3AVpXPfUyvbLydBhAg="
+//<YOUR.EVENTHUB.COMPATIBLE.NAME>
+val ehName = "openhack-munich-test-iot"
+//<YOUR.CONSUMER.GROUP>
+val consumerGroup = "romit"
 
 // Build connection string with the above information 
-val connectionString = ConnectionStringBuilder("<YOUR.EVENTHUB.COMPATIBLE.ENDPOINT>")
-  .setEventHubName("<YOUR.EVENTHUB.COMPATIBLE.NAME>")
+val connectionString = ConnectionStringBuilder(iotConnString)
+  .setEventHubName(ehName)
   .build
 
 // this sets up our event hubs configuration, including consumer group
 val ehConf = EventHubsConf(connectionString)
-  .setConsumerGroup("<YOUR.CONSUMER.GROUP>")
+  .setConsumerGroup(consumerGroup)
 
 // COMMAND ----------
 
