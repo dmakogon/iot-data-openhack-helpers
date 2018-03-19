@@ -86,12 +86,12 @@ import org.apache.spark.sql.eventhubs._
 import org.apache.spark.eventhubs.ConnectionStringBuilder
 import org.apache.spark.eventhubs.EventHubsConf
 
-//<YOUR.EVENTHUB.COMPATIBLE.ENDPOINT>"
-val iotConnString = "Endpoint=sb://iothub-ns-openhack-m-376822-140f1bd390.servicebus.windows.net/;SharedAccessKeyName=iothubowner;SharedAccessKey=POzssj3SYghfRzNW14mgIVEWB3AVpXPfUyvbLydBhAg="
-//<YOUR.EVENTHUB.COMPATIBLE.NAME>
-val ehName = "openhack-munich-test-iot"
-//<YOUR.CONSUMER.GROUP>
-val consumerGroup = "romit"
+
+val iotConnString = <YOUR.EVENTHUB.COMPATIBLE.ENDPOINT>
+
+val ehName = <YOUR.EVENTHUB.COMPATIBLE.NAME>
+
+val consumerGroup = <YOUR.CONSUMER.GROUP>
 
 // Build connection string with the above information 
 val connectionString = ConnectionStringBuilder(iotConnString)
