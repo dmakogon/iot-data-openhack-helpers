@@ -85,6 +85,8 @@ import org.apache.spark.sql.eventhubs._
 // COMMAND ----------
 
 // Modify to include your event hubs parameters here
+// Note: This code works only with the latest Event Hubs driver,
+// which is supported by both Databricks v4.0 and HDInsight v3.5
 
 import org.apache.spark.eventhubs.ConnectionStringBuilder
 import org.apache.spark.eventhubs.EventHubsConf
@@ -104,6 +106,10 @@ val connectionString = ConnectionStringBuilder(iotConnString)
 // this sets up our event hubs configuration, including consumer group
 val ehConf = EventHubsConf(connectionString)
   .setConsumerGroup(consumerGroup)
+
+// COMMAND ----------
+
+
 
 // COMMAND ----------
 
