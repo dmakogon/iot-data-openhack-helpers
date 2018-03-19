@@ -119,10 +119,12 @@ display(serverName)
 
 import org.apache.spark.sql.SaveMode
 
-// By default create and load the table
+// Drop existing table if needed, create a new table and fill it 
 // https://docs.azuredatabricks.net/spark/latest/data-sources/sql-databases.html#write-data-to-jdbc
+// https://spark.apache.org/docs/2.3.0/api/scala/index.html#org.apache.spark.sql.DataFrameWriter
 spark.sql("select * from iris")
-     .write 
+     .write
+     .mode(SaveMode.Overwrite)
      .jdbc(jdbcUrl, "iris", connectionProperties)
 
 // COMMAND ----------
