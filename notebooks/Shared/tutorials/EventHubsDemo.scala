@@ -28,8 +28,7 @@
 // MAGIC 
 // MAGIC For Databricks, these are the Maven coordinates for the Event Hubs SDK for Databricks:
 // MAGIC 
-// MAGIC  - Cluster v3.5, with Spark v2.1: `com.microsoft.azure:azure-eventhubs-databricks_2.11:3.4.0`
-// MAGIC  - Cluster v4.0, with Spark v2.3: `com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.0`
+// MAGIC  - Cluster v3.5 and above (Scala 2.11+):  `com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.0`
 // MAGIC  
 // MAGIC  To install the SDK in Databricks, traverse to the `Shared` folder (or your own personal folder) and select `Create Library`:
 // MAGIC  
@@ -198,16 +197,7 @@ memoryQuery.stop()
 
 // COMMAND ----------
 
-val df = spark.read.csv("/databricks-datasets/data.gov/irs_zip_code_data/data-001/2013_soi_zipcode_agi.csv")
-df.select("_c0","_c1").groupBy("_c0").
-
-// COMMAND ----------
-
 // MAGIC %md
 // MAGIC #Data Sources
 // MAGIC 
 // MAGIC With Spark, you have many options for working with data sources. See <a href="$./IntroToDataSources">this Notebook</a> for more information about data sources.
-
-// COMMAND ----------
-
-#
