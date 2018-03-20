@@ -138,13 +138,14 @@ spark.sql("select * from iris limit 10").show(truncate=false)
 // COMMAND ----------
 
 // MAGIC %md
-// MAGIC Connect to an Azure SQL database using JDBC driver
+// MAGIC Connect to an Azure SQL database using JDBC driver. 
+// MAGIC Make sure you create your own Azure SQL database (https://docs.microsoft.com/en-us/azure/sql-database/sql-database-get-started-portal), and the get the host name, database name, login and password and use in the following code
 
 // COMMAND ----------
 
-val jdbcHostname = "openhacksqlsrv.database.windows.net"
+val jdbcHostname = "<your host name>.database.windows.net"
 val jdbcPort = 1433
-val jdbcDatabase ="openhacksqldb"
+val jdbcDatabase ="<your database name>"
 
 // Create the JDBC URL without passing in the user and password parameters.
 val jdbcUrl = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcDatabase}"
@@ -152,8 +153,8 @@ val jdbcUrl = s"jdbc:sqlserver://${jdbcHostname}:${jdbcPort};database=${jdbcData
 // Create a Properties() object to hold the parameters.
 import java.util.Properties
 val connectionProperties = new java.util.Properties()
-val jdbcUsername = "openhack"
-val jdbcPassword = "0penH4ck!"
+val jdbcUsername = "<your database user name>"
+val jdbcPassword = "<your database password>"
 connectionProperties.put("user", s"${jdbcUsername}")
 connectionProperties.put("password", s"${jdbcPassword}")
 
