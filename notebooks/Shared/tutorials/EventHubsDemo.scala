@@ -87,15 +87,13 @@ import org.apache.spark.sql.eventhubs._
 // Note: This code works only with the latest Event Hubs driver,
 // which is supported by both Databricks v3.5 & v4.0 and HDInsight v3.5
 
-import org.apache.spark.eventhubs.ConnectionStringBuilder
-import org.apache.spark.eventhubs.EventHubsConf
+import org.apache.spark.eventhubs._
 
+val iotConnString = "<YOUR.EVENTHUB.COMPATIBLE.ENDPOINT>"
 
-val iotConnString = <YOUR.EVENTHUB.COMPATIBLE.ENDPOINT>
+val ehName = "<YOUR.EVENTHUB.COMPATIBLE.NAME>"
 
-val ehName = <YOUR.EVENTHUB.COMPATIBLE.NAME>
-
-val consumerGroup = <YOUR.CONSUMER.GROUP>
+val consumerGroup = "<YOUR.CONSUMER.GROUP>"
 
 // Build connection string with the above information 
 val connectionString = ConnectionStringBuilder(iotConnString)
@@ -105,10 +103,6 @@ val connectionString = ConnectionStringBuilder(iotConnString)
 // this sets up our event hubs configuration, including consumer group
 val ehConf = EventHubsConf(connectionString)
   .setConsumerGroup(consumerGroup)
-
-// COMMAND ----------
-
-
 
 // COMMAND ----------
 
@@ -132,7 +126,6 @@ val df = spark
   .format("eventhubs")
   .options(ehConf.toMap)
   .load()
-
 
 // COMMAND ----------
 
@@ -179,11 +172,17 @@ val memoryQuery = eventhubsDF.writeStream
 // MAGIC # Reading: From memory
 // MAGIC We should now have data in our in-memory table, which we can now query, to get an idea of what our data looks like.
 // MAGIC 
-// MAGIC At this point, you can experiment with this query in any way you see fit.
+// MAGIC At this point, you can experiment with this query in any way you see fit. Here are two ways to display data coming from `spark.sql()`:
 
 // COMMAND ----------
 
-spark.sql("SELECT * from sampledata")
+// if you omit the 'truncate' parameter, it defaults to 'true', 
+// which shortens output strings for display purposes
+spark.sql("SELECT * from sampledata").show(truncate=false)
+
+// COMMAND ----------
+
+display(spark.sql("SELECT * from sampledata"))
 
 // COMMAND ----------
 
