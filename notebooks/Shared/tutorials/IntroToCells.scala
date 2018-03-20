@@ -45,6 +45,15 @@ print(greeting)
 // MAGIC %python
 // MAGIC python_greeting = 'Hello world!'
 // MAGIC print(python_greeting)
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC Note: Even though you may mix languages, each language has its own environment and runtime. So, for example, a variable declared in Scala cannot be referenced via Python. If you run the following cell, you should see an error:
+
+// COMMAND ----------
+
+// MAGIC %python
 // MAGIC print(greeting) # this should fail - variable is defined in scala, not python
 
 // COMMAND ----------
