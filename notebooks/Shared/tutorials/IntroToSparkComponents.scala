@@ -19,7 +19,7 @@
 // MAGIC 
 // MAGIC While there are many operations and transforms you can perform on an RDD, there isn't much structure to the data. And that is where DataFrames come into play.
 // MAGIC 
-// MAGIC ## DataFrames
+// MAGIC ## Dataframes
 // MAGIC 
 // MAGIC These are the new way of data processing in Spark. A Spark dataframe can be thought of as a table. Similar to a relational data table, with columns and rows. In reality, there aren't exactly *rows*. More like chunks of data (static or streaming), organized into the dataframe in a similar way to how you'd organize data in a database table.
 // MAGIC 
@@ -42,6 +42,7 @@
 // MAGIC %md
 // MAGIC ## Learning more
 // MAGIC 
+// MAGIC  - For a quick example of using Spark in Databricks, check out this [Word Count Notebook]($./WordcountExample).
 // MAGIC  - Spark's introductory programming guide is [here](https://spark.apache.org/docs/latest/sql-programming-guide.html#loading-data-programmatically), giving a great overview of working with RDDs, Datasets, and SQL.
 // MAGIC  - Download the free eBook from Databricks, "A Gentle Introduction to Apache Spark", [here](https://pages.databricks.com/gentle-intro-spark.html)
 // MAGIC  - Spark has an entire set of programming guides at [spark.apache.org](https://spark.apache.org). A few specific pages that are very helpful:
