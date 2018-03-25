@@ -2,7 +2,8 @@
 // MAGIC %md
 // MAGIC # Welcome!
 // MAGIC 
-// MAGIC This set of notebooks provide short introductions to several key concepts when working with Spark+Azure, with Databricks. Where applicable, these notebooks also contain links to additional resources.
+// MAGIC This set of notebooks provides short introductions to several key concepts when working with Spark+Azure, with Databricks. Where applicable, these notebooks also contain links to additional resources.
+// MAGIC 
 // MAGIC 
 // MAGIC  - Databricks notebooks [[link]($./IntroToNotebooks)]
 // MAGIC  - Event Hubs / IoT Hub Integration with Spark [[link]($./IntroToEventHubs)]
