@@ -24,7 +24,7 @@ val greeting = "Hello world!"
 // MAGIC %md
 // MAGIC In the cell above, a string, called `greeting`, is defined. To run this cell, either choose <b>"Play"</b> arrow button in the top-right of the cell, or use the `<shift>-<enter>` shortcut while your cursor is anywhere within the cell. You should then see something similar to:
 // MAGIC 
-// MAGIC `greeting: Strting = Hello world!`
+// MAGIC `greeting: String = Hello world!`
 // MAGIC 
 // MAGIC Now, in the next cell, we simply print out the greeting. Because all cells share a session, the `greeting` variable should already be defined. Go ahead and run the next cell.
 
@@ -106,6 +106,3 @@ print(greeting)
 // MAGIC Further: Databricks Notebooks are linkable to version control systems such as github, which helps considerably when trying to track changes. In general, this lets you treat Notebooks the same way you'd treat any other source file.
 // MAGIC 
 // MAGIC For more details on Databricks Github integration, take a look at [this article](https://docs.databricks.com/user-guide/notebooks/github-version-control.html).
-
-// COMMAND ----------
-
