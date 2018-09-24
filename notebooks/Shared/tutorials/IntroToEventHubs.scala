@@ -28,23 +28,32 @@
 // MAGIC 
 // MAGIC For Databricks, these are the Maven coordinates for the Event Hubs SDK for Databricks:
 // MAGIC 
-// MAGIC  - Cluster v3.5 and above (Scala 2.11+):  `com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.0`
+// MAGIC  - Cluster v4.2 and above (Scala 2.11+):  `com.microsoft.azure:azure-eventhubs-spark_2.11:2.3.4`
+// MAGIC  
+// MAGIC Note: The versioning is periodically updated. To use the latest version, you may choose to search Maven for the latest version.
 // MAGIC  
 // MAGIC  To install the SDK in Databricks, traverse to the `Shared` folder (or your own personal folder) and select `Create Library`:
 // MAGIC  
 // MAGIC ![menu for creating library](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/create-library-menu.png?raw=true)
 // MAGIC 
-// MAGIC 
-// MAGIC Then, choose to enter Maven coordinates, enter the correct SDK's coordinates, and choose to Create the library:
+// MAGIC Change the source to "Maven Coordinate". Then, to search for the latest driver version, choose "Search Spark Packages and Maven Central":
 // MAGIC 
 // MAGIC ![select Maven option](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/source-maven.png?raw=true)
 // MAGIC 
+// MAGIC In the upper-right, the default set of packages is "Spark" - change this to "Maven Central" and type "`eventhubs`" in the Search Packages box. This should present you with a list of packages. Choose the one with Group Id `com.microsoft.azure` and Artifact Id `azure-eventhubs-spark_2.11`. Expand the Releases dropdown and choose the latest (version 2.3.4 currently).
+// MAGIC 
+// MAGIC 
+// MAGIC ![search for Maven package](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/search-packages.png?raw=true)
+// MAGIC 
+// MAGIC Click the Select button on the far-right, which will return you to the Import form, with all details filled in. Click Create Library.
 // MAGIC 
 // MAGIC ![menu for creating library](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/maven-create.png?raw=true)
 // MAGIC 
-// MAGIC At this point, you must attach the SDK to a cluster. You will be shown a list of your clusters. Choose which ever cluster(s) you are using, and select the checkbox.
+// MAGIC You must attach the SDK to a cluster. You will be shown a list of your clusters. Choose whichever cluster(s) you are using, and select the checkbox. You may also choose "Attach automatically to all clusters."
 // MAGIC 
 // MAGIC ![menu for creating library](https://github.com/dmakogon/iot-data-openhack-helpers/blob/master/images/attach-driver-to-cluster.png?raw=true =300x)
+// MAGIC 
+// MAGIC At this point, your Event Hubs Spark library is ready to use.
 // MAGIC 
 // MAGIC ## Imports
 // MAGIC Next, we'll define some important import statements, required for the Spark Connector. 
