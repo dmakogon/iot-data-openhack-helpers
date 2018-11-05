@@ -1,0 +1,13 @@
+﻿{"body":"{\"temperature\":54,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T00:00:00.000Z\"}"}
+{"body":"{\"temperature\":57,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T01:00:00.000Z\"}"}
+{"body":"{\"temperature\":57,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T02:00:00.000Z\"}"}
+{"body":"{\"temperature\":58,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T03:00:00.000Z\"}"}
+{"body":"{\"temperature\":60,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T04:00:00.000Z\"}"}
+{"body":"{\"temperature\":63,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T05:00:00.000Z\"}"}
+{"body":"{\"temperature\":63,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T06:00:00.000Z\"}"}
+{"body":"{\"temperature\":64,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T07:00:00.000Z\"}"}
+{"body":"{\"temperature\":66,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T08:00:00.000Z\"}"}
+{"body":"{\"temperature\":67,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T09:00:00.000Z\"}"}
+{"body":"{\"temperature\":67,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T10:00:00.000Z\"}"}
+{"body":"{\"temperature\":71,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T11:00:00.000Z\"}"}
+{"body":"{\"temperature\":73,\"zipcode\":\"12345\",\"timestamp\":\"2018-01-01T12:00:00.000Z\"}"}

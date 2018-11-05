@@ -121,16 +121,16 @@ val ehConf = EventHubsConf(connectionString)
 // MAGIC 
 // MAGIC For this simple example, we are using Event Hubs as the streaming source of our Dataframe, and taking advantage of the `readStream` function to read directly from Event Hubs. `readStream` is similar to a file object's `read` method that you might have seen in other languages.
 // MAGIC 
-// MAGIC It is important to understand the difference between `read` function and `readStream`. Simply stated, it is as follows: <br>
-// MAGIC `read` => For reading static data or data in batches.<br>
-// MAGIC `readStream` => For reading streaming data.
+// MAGIC It is important to understand the difference between `read` function and `readStream`. Simply stated:
+// MAGIC `read` => For reading static data or data in batches
+// MAGIC `readStream` => For reading streaming data
 // MAGIC 
 // MAGIC **See also:** [reading data from event hubs](https://github.com/Azure/azure-event-hubs-spark/blob/master/docs/structured-streaming-eventhubs-integration.md#reading-data-from-event-hubs)
 
 // COMMAND ----------
 
-// First, create the data frame
-val df = spark
+// Create a data frame representing the Event Hubs incoming stream
+val eventhubsDF = spark
   .readStream
   .format("eventhubs")
   .options(ehConf.toMap)
@@ -141,7 +141,7 @@ val df = spark
 // MAGIC %md
 // MAGIC # Extracting data from Event Hubs
 // MAGIC 
-// MAGIC Each "row" of data coming from Event Hubs has the following schema:
+// MAGIC Each message coming from Event Hubs has the following schema:
 // MAGIC 
 // MAGIC | Column | Type |
 // MAGIC |----------|----------|
@@ -152,12 +152,12 @@ val df = spark
 // MAGIC | publisher | string |
 // MAGIC | partitionKey | string |
 // MAGIC 
-// MAGIC For our purposes, we only need `body`. The issue is, `body` is transmitted as binary data by Event Hubs by default.  So, we will do a simple cast to convert this data to a string.
+// MAGIC For our purposes, we only need `body`. The issue is, `body` is transmitted as binary data by Event Hubs, by default.  So, we will do a cast to convert this data to a string.
 
 // COMMAND ----------
 
-// create a new dataframe with decoded body
-val eventhubsDF = df
+// create a new dataframe with decoded body as string
+val stringbodyDF = eventhubsDF
   .selectExpr("CAST(body as STRING)")
 
 // COMMAND ----------
@@ -169,8 +169,11 @@ val eventhubsDF = df
 
 // COMMAND ----------
 
-// now write to an in-memory table. We'll save this in a variable so we can stop it later
-val memoryQuery = eventhubsDF.writeStream
+// Set up an in-memory table.
+// Note: the moment `start()` is called, everything is set into motion, and data will
+// begin streaming into our new in-memory table.
+
+val memoryQuery = stringbodyDF.writeStream
     .format("memory")
     .queryName("sampledata") // this is the table name to be used for our in-memory table
     .start()
@@ -179,7 +182,7 @@ val memoryQuery = eventhubsDF.writeStream
 
 // MAGIC %md
 // MAGIC # Reading: From memory
-// MAGIC We should now have data in our in-memory table, which we can now query, to get an idea of what our data looks like.
+// MAGIC We should now have our in-memory table filling with data from our Event Hubs source, which we can now query, to get an idea of what our data looks like.
 // MAGIC 
 // MAGIC At this point, you can experiment with this query in any way you see fit. Here are two ways to display data coming from `spark.sql()`:
 
