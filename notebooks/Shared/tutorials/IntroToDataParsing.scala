@@ -1,5 +1,5 @@
 // Databricks notebook source
-// MAGIC %md # Parsing incoming data
+// MAGIC %md # Parsing incoming JSON data
 // MAGIC 
 // MAGIC As shown in the Intro to Event Hubs notebook, data arriving via Event Hubs is stored in the `Body` field of each message.
 // MAGIC The `Body` content is binary-encoded. If string-based data is being transmitted, it's necessary
@@ -34,13 +34,13 @@ import org.apache.spark.sql.functions._
 spark.conf.set(
   "fs.azure.account.key.<StorageAccountName>.blob.core.windows.net",
   "<StorageAccountKey>")
-
+  
 // Create a schema for the incoming data, to treat the body as string
 val bodySchema = new StructType().add("body", "string")
 
 // Connect to blob storage and treat it as a stream. Specify the storage account name and container name you configured:
 val inputBlobStreamDF = spark.readStream.schema(bodySchema)
-    .json("wasbs://<containerName>@<StorageAccountName>.blob.core.windows.net/")
+    .json("wasbs://<ContainerName>@<StorageAccountName>.blob.core.windows.net/")
 
 // COMMAND ----------
 
@@ -130,3 +130,52 @@ spark.sql("SELECT reading.* from weatherdata").show(truncate=false)
 // COMMAND ----------
 
 memoryQuery.stop()
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC # Writing to storage
+// MAGIC 
+// MAGIC Instead of writing to memory for querying, let's say we want to write our incoming stream to storage. In this example, we are reading from sample data in storage, but in a real-world application, thousands (millions?) of weather data points would arrive via Event Hubs or Iot Hub, and we'd want to store it for later processing.
+// MAGIC 
+// MAGIC When storing, we can partition data by a given set of properties. In this example, we will do a simple partitioning by zipcode, and then within hour of day within that zipcode (ignoring the rest of the date, since our sample data is for only one day). In a real-world scenario, you would likely partition by something like year, month, day, and optionally hour, and store more than just the temperature reading (maybe barometric pressure, precipitation, humidity, etc). 
+
+// COMMAND ----------
+
+// Grab needed columns for partitioning. We'll parse down to hour of day within zipcode, as a simple example.
+// This effectively grabs 3 columns, creates an additional parsed column called "hour", and then selects
+// all columns (including the data we want, along with extra parsed properties for partitioning purposes)
+val partitionDF = schemaDF
+.select("reading.temperature", "reading.timestamp", "reading.zipcode")
+.withColumn("hour", hour(col("timestamp").cast("timestamp"))) // extracting hour from timestap column, into new "hour" column
+.where("hour is not null") // simple data integrity check
+.select("zipcode", "hour", "temperature") // our final set of columns to work with
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC Now that we have our needed columns in a dataframe, we will stream that dataframe into Azure Blob storage.
+
+// COMMAND ----------
+
+// start output stream. Note that you will need two additional storage containers: one for "checkpoint" information that Spark
+// stores while streaming data, and the other is for all of your archived output. Within the output container, you will find
+// several additional "folders" partitioned based on the partitioning parameters specified in "partitionBy()".
+val archivestream = (partitionDF.writeStream
+.outputMode("append")
+.option("compression", "none") // you can also choose "gzip" - leaving as "none" so you can easily view the output
+.format("json") // you can also choose several other formats, including "csv" and "parquet"
+.option("checkpointLocation", "wasbs://<CheckpointContainerName>@<StorageAccountName>.blob.core.windows.net/checkpointdir/")
+.option("path", "wasbs://<OutputContainerName>@<StorageAccountName>.blob.core.windows.net/data/")
+.partitionBy("zipcode","hour")
+.start())
+
+// COMMAND ----------
+
+// MAGIC %md
+// MAGIC If you now browse your storage account, you'd find several folders under `output`, and you can download and view any of the json files within the hourly folders.
+
+// COMMAND ----------
+
+// terminate the streaming-to-storage job
+archivestream.stop()
